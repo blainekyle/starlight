@@ -56,7 +56,7 @@
             box-shadow: 0 0 12px rgba(207, 168, 98, 0.7) !important;
         }
 
-        /* TOP FRAMING BAR (Removed orange/brown border-bottom) */
+        /* TOP FRAMING BAR */
         #top-framing-bar {
             position: fixed;
             top: 0;
@@ -128,6 +128,45 @@
             transform: translateY(0);
         }
 
+        /* LIVE Mode Indicator (Replaces Pause in Live mode) */
+        #live-indicator-btn {
+            display: none;
+            cursor: default;
+            pointer-events: none;
+            background: rgba(20, 10, 8, 0.9);
+            border: 1px solid rgba(207, 168, 98, 0.35);
+            padding: 4px 12px;
+        }
+
+        .live-led-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background-color: #d11e28;
+            box-shadow: 0 0 6px rgba(230, 30, 40, 0.65);
+            display: inline-block;
+            margin-right: 2px;
+        }
+
+        /* Mode Toggle Button (LIVE vs SOLO) */
+        #mode-toggle-btn {
+            background: linear-gradient(135deg, rgba(30, 18, 12, 0.9) 0%, rgba(50, 20, 14, 0.9) 100%);
+            border: 1px solid rgba(207, 168, 98, 0.45);
+            color: #ecd9c6;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+        }
+
+        #mode-toggle-btn:hover {
+            border-color: var(--gold-accent);
+            color: #fff;
+        }
+
+        .mode-status-highlight {
+            color: var(--gold-accent);
+            font-weight: 700;
+        }
+
         #lean-in-btn {
             background: linear-gradient(135deg, rgba(120, 13, 22, 0.8) 0%, rgba(64, 6, 9, 0.9) 100%);
             border: 1px solid rgba(207, 168, 98, 0.5);
@@ -141,6 +180,12 @@
             background: linear-gradient(135deg, rgba(168, 28, 37, 0.9) 0%, rgba(120, 13, 22, 0.95) 100%);
             box-shadow: 0 0 10px rgba(168, 28, 37, 0.5), inset 0 0 8px rgba(207, 168, 98, 0.4);
             color: #fff;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         /* THEATER AUDITORIUM VIEWPORT */
@@ -172,7 +217,7 @@
                 #000 100%);
             box-shadow: 0 6px 16px rgba(0,0,0,0.95);
             z-index: 60;
-            border-bottom: none; /* Removed borders */
+            border-bottom: none;
         }
 
         /* Main Stage Container */
@@ -278,7 +323,7 @@
             opacity: 0.85;
         }
 
-        /* LAYER 1: INNER DYNAMIC TRAILING CURTAINS (60% wave amplitude: ~3.5px depth) */
+        /* LAYER 1: INNER DYNAMIC TRAILING CURTAINS */
         .curtain-inner {
             position: absolute;
             top: 0;
@@ -298,7 +343,7 @@
             transition: width 1.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             will-change: width;
             filter: drop-shadow(0 14px 12px rgba(0,0,0,0.95));
-            border: none; /* Removed borders */
+            border: none;
         }
 
         .curtain-inner.left {
@@ -329,7 +374,7 @@
             );
         }
 
-        /* LAYER 2: 3D PERSPECTIVE WALL CURTAINS (60% wave amplitude, NO borders) */
+        /* LAYER 2: 3D PERSPECTIVE WALL CURTAINS */
         .curtain-wall {
             position: absolute;
             top: 0;
@@ -348,7 +393,7 @@
             );
             transform-style: preserve-3d;
             filter: drop-shadow(0 16px 14px rgba(0,0,0,0.98));
-            border: none; /* Removed borders completely */
+            border: none;
         }
 
         .curtain-wall::after {
@@ -361,7 +406,6 @@
             pointer-events: none;
         }
 
-        /* Left 3D Wall Curtain (Shadow inward, 60% subtle wave scallops) */
         .curtain-wall.left {
             left: 0;
             box-shadow: 
@@ -395,7 +439,6 @@
                 transparent 100%);
         }
 
-        /* Right 3D Wall Curtain (Shadow inward, 60% subtle wave scallops) */
         .curtain-wall.right {
             right: 0;
             box-shadow: 
@@ -626,7 +669,7 @@
             right: 0;
             height: var(--bottom-bar-height);
             background: linear-gradient(180deg, #110905 0%, #080402 100%);
-            border-top: none; /* Removed border */
+            border-top: none;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -703,7 +746,7 @@
             border-color: var(--gold-accent);
         }
 
-        /* MOVIE INFO DRAWER WITH RUNTIME & TIMELINE */
+        /* MOVIE INFO DRAWER WITH RUNTIME & TIMELINE TRACK */
         #info-drawer {
             position: absolute;
             bottom: 120px;
@@ -746,7 +789,6 @@
             line-height: 1.6;
         }
 
-        /* Timeline bar matching white/gray text */
         .info-timeline {
             display: flex;
             align-items: center;
@@ -775,7 +817,7 @@
             border-radius: 2px;
         }
 
-        /* CUSTOM PAUSE MENU PANEL (Save, Load, Export) */
+        /* CUSTOM PAUSE MENU DRAWER */
         #pause-menu-drawer {
             position: absolute;
             bottom: 120px;
@@ -848,7 +890,6 @@
             transform: translateY(-2px);
         }
 
-        /* Save Slots Submenu List */
         .slot-list {
             display: flex;
             flex-direction: column;
@@ -895,7 +936,6 @@
             color: #7d756d;
         }
 
-        /* Confirmation Modal Overlay */
         #confirm-modal {
             display: none;
             position: absolute;
@@ -926,7 +966,6 @@
             gap: 12px;
         }
 
-        /* Hidden File Input for JSON Import */
         #json-import-input {
             display: none;
         }
@@ -947,13 +986,15 @@
         <nav id="playback-controls" aria-label="Playback Controls">
             <button id="ctrl-prev" class="bar-btn" title="Previous Movie (Gamepad LB / Left Arrow)" tabindex="1">&laquo; Prev</button>
             <button id="ctrl-play-pause" class="bar-btn" title="Play/Pause (Gamepad A / Space)" tabindex="2">&#9646;&#9646; Pause</button>
+            <div id="live-indicator-btn" class="bar-btn"><span class="live-led-dot"></span> LIVE</div>
             <button id="ctrl-next" class="bar-btn" title="Next Movie (Gamepad RB / Right Arrow)" tabindex="3">Next &raquo;</button>
             <button id="ctrl-mute" class="bar-btn" title="Mute/Unmute (Gamepad Y / M)" tabindex="4">Sound On</button>
             <button id="ctrl-info" class="bar-btn" title="Cinema Info (Gamepad X / I)" tabindex="5">Info</button>
         </nav>
 
         <div class="header-right">
-            <button id="lean-in-btn" class="bar-btn" title="Spartan View (F / Gamepad Select)" tabindex="6">LEAN IN</button>
+            <button id="mode-toggle-btn" class="bar-btn" title="Toggle Broadcast Mode (L / Gamepad Y+LB)" tabindex="6">MODE: <span id="mode-label" class="mode-status-highlight">LIVE</span></button>
+            <button id="lean-in-btn" class="bar-btn" title="Spartan View (F / Gamepad Select)" tabindex="7">LEAN IN</button>
         </div>
     </header>
 
@@ -1013,6 +1054,7 @@
     <footer id="bottom-legend-bar">
         <div class="legend-item"><span class="legend-key">&#9664; &#9654;</span> Skip / Nav</div>
         <div class="legend-item"><span class="legend-key">OK / Space</span> Play / Pause</div>
+        <div class="legend-item"><span class="legend-key">L</span> Toggle Live</div>
         <div class="legend-item"><span class="legend-key">F / Select</span> Lean In</div>
         <div class="legend-item"><span class="legend-key">I / (X)</span> Info</div>
         <div class="legend-item"><span class="legend-key">M / (Y)</span> Sound</div>
@@ -1044,14 +1086,12 @@
             <span id="pause-nav-hint" class="pause-nav-hint">SELECT OPTION &bull; [ESC / B] RESUME</span>
         </div>
 
-        <!-- Main Pause Options -->
         <div id="pause-main-menu" class="pause-menu-row">
             <button id="btn-menu-save" class="menu-action-btn" tabindex="20">Save</button>
             <button id="btn-menu-load" class="menu-action-btn" tabindex="21">Load</button>
             <button id="btn-menu-export" class="menu-action-btn" tabindex="22">Export / Import</button>
         </div>
 
-        <!-- Submenu Slots List -->
         <div id="pause-submenu-slots" style="display: none;">
             <div id="slots-container" class="slot-list"></div>
             <div style="margin-top: 14px; display: flex; justify-content: space-between;">
@@ -1076,7 +1116,6 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // URL clean-up
             if (window.location.search.includes('fbclid')) {
                 const cleanUrl = window.location.href.split('?')[0];
                 window.history.replaceState(null, '', cleanUrl);
@@ -1128,18 +1167,23 @@
             const confirmModalNo = document.getElementById('confirm-modal-no');
             const jsonImportInput = document.getElementById('json-import-input');
 
+            // Header Controls
             const ctrlPrev = document.getElementById('ctrl-prev');
             const ctrlPlayPause = document.getElementById('ctrl-play-pause');
+            const liveIndicatorBtn = document.getElementById('live-indicator-btn');
             const ctrlNext = document.getElementById('ctrl-next');
             const ctrlMute = document.getElementById('ctrl-mute');
             const ctrlInfo = document.getElementById('ctrl-info');
+            const modeToggleBtn = document.getElementById('mode-toggle-btn');
+            const modeLabel = document.getElementById('mode-label');
 
             const focusableElements = [
-                ctrlPrev, ctrlPlayPause, ctrlNext, ctrlMute, ctrlInfo, leanInBtn
+                ctrlPrev, ctrlPlayPause, ctrlNext, ctrlMute, ctrlInfo, modeToggleBtn, leanInBtn
             ];
             let currentFocusIndex = 1;
 
             // State management
+            let currentMode = 'live'; // 'live' | 'solo'
             let activeVideo = mainVideo;
             let currentQueue = [];
             let currentIndex = 0;
@@ -1147,35 +1191,46 @@
             let infoHideTimer = null;
             let leanInInvokedFullscreen = false;
             let curtainsOpened = false;
-            let activeSubmenuMode = null; // 'save' | 'load' | 'export'
+            let activeSubmenuMode = null;
             let pendingImportSlot = null;
             const prerollDurationBounds = { min: 15, max: 150 };
 
-            // 1. CLASSIC AMERICAN SOUND MOVIEGOING CANON
+            // Saved Solo State for Mode Toggling
+            let savedSoloState = null;
+
+            // Live Synchronization Settings & Network Clock Offset
+            let networkTimeOffsetMs = 0;
+            let liveSchedConfig = {
+                seed: 19401225,
+                epoch: "2026-01-01T00:00:00Z",
+                inserts: []
+            };
+
+            // 1. CLASSIC AMERICAN SOUND MOVIEGOING CANON (Pre-computed runtimes in seconds)
             const CURATED_FEATURE_FILMS = [
-                { id: 'his_girl_friday', title: 'His Girl Friday (1940)', year: 1940 },
-                { id: 'TheStranger_0', title: 'The Stranger (1946)', year: 1946 },
-                { id: 'the-lady-vanishes-1938', title: 'The Lady Vanishes (1938)', year: 1938 },
-                { id: 'my_favorite_brunette', title: 'My Favorite Brunette (1947)', year: 1947 },
-                { id: 'house_on_haunted_hill_ipod', title: 'House on Haunted Hill (1959)', year: 1959 },
-                { id: 'suddenly', title: 'Suddenly (1954)', year: 1954 },
-                { id: 'ScarletStreet', title: 'Scarlet Street (1945)', year: 1945 },
-                { id: 'Detour', title: 'Detour (1945)', year: 1945 },
-                { id: 'doa_ipod', title: 'D.O.A. (1949)', year: 1949 },
-                { id: 'Hitch_Hiker', title: 'The Hitch-Hiker (1953)', year: 1953 },
-                { id: 'kansascityconfidencial', title: 'Kansas City Confidential (1952)', year: 1952 },
-                { id: 'He_Walked_By_Night.avi', title: 'He Walked by Night (1948)', year: 1948 },
-                { id: 'Charade_1953', title: 'Charade (1963)', year: 1963 },
-                { id: 'Night.Of.The.Living.Dead_1080p', title: 'Night of the Living Dead (1968)', year: 1968 },
-                { id: 'CarnivalofSouls', title: 'Carnival of Souls (1962)', year: 1962 },
-                { id: 'The_Little_Shop_of_Horrors.mpeg', title: 'The Little Shop of Horrors (1960)', year: 1960 },
-                { id: 'Mclintock.avi', title: 'McLintock! (1963)', year: 1963 },
-                { id: 'Cyrano_DeBergerac', title: 'Cyrano de Bergerac (1950)', year: 1950 },
-                { id: 'dressed_to_kill', title: 'Dressed to Kill (1946)', year: 1946 },
-                { id: 'gullivers_travels1939', title: "Gulliver's Travels (1939)", year: 1939 },
-                { id: 'white_zombie', title: 'White Zombie (1932)', year: 1932 },
-                { id: 'PennySerenade', title: 'Penny Serenade (1941)', year: 1941 },
-                { id: 'royal_wedding', title: 'Royal Wedding (1951)', year: 1951 }
+                { id: 'his_girl_friday', title: 'His Girl Friday (1940)', year: 1940, length: 5504 },
+                { id: 'TheStranger_0', title: 'The Stranger (1946)', year: 1946, length: 5472 },
+                { id: 'the-lady-vanishes-1938', title: 'The Lady Vanishes (1938)', year: 1938, length: 5760 },
+                { id: 'my_favorite_brunette', title: 'My Favorite Brunette (1947)', year: 1947, length: 5212 },
+                { id: 'house_on_haunted_hill_ipod', title: 'House on Haunted Hill (1959)', year: 1959, length: 4483 },
+                { id: 'suddenly', title: 'Suddenly (1954)', year: 1954, length: 4620 },
+                { id: 'ScarletStreet', title: 'Scarlet Street (1945)', year: 1945, length: 6120 },
+                { id: 'Detour', title: 'Detour (1945)', year: 1945, length: 4080 },
+                { id: 'doa_ipod', title: 'D.O.A. (1949)', year: 1949, length: 4980 },
+                { id: 'Hitch_Hiker', title: 'The Hitch-Hiker (1953)', year: 1953, length: 4260 },
+                { id: 'kansascityconfidencial', title: 'Kansas City Confidential (1952)', year: 1952, length: 5940 },
+                { id: 'He_Walked_By_Night.avi', title: 'He Walked by Night (1948)', year: 1948, length: 4740 },
+                { id: 'Charade_1953', title: 'Charade (1963)', year: 1963, length: 6780 },
+                { id: 'Night.Of.The.Living.Dead_1080p', title: 'Night of the Living Dead (1968)', year: 1968, length: 5760 },
+                { id: 'CarnivalofSouls', title: 'Carnival of Souls (1962)', year: 1962, length: 4980 },
+                { id: 'The_Little_Shop_of_Horrors.mpeg', title: 'The Little Shop of Horrors (1960)', year: 1960, length: 4320 },
+                { id: 'Mclintock.avi', title: 'McLintock! (1963)', year: 1963, length: 7595 },
+                { id: 'Cyrano_DeBergerac', title: 'Cyrano de Bergerac (1950)', year: 1950, length: 6720 },
+                { id: 'dressed_to_kill', title: 'Dressed to Kill (1946)', year: 1946, length: 4320 },
+                { id: 'gullivers_travels1939', title: "Gulliver's Travels (1939)", year: 1939, length: 4560 },
+                { id: 'white_zombie', title: 'White Zombie (1932)', year: 1932, length: 4020 },
+                { id: 'PennySerenade', title: 'Penny Serenade (1941)', year: 1941, length: 7140 },
+                { id: 'royal_wedding', title: 'Royal Wedding (1951)', year: 1951, length: 5580 }
             ];
 
             // 2. VINTAGE POLICY & CONCESSIONS BUMPERS ONLY
@@ -1249,7 +1304,161 @@
                 return `${m}:${s.toString().padStart(2, '0')}`;
             }
 
-            // High-Entropy Fisher-Yates Shuffle with Crypto Random
+            // 3. DETERMINISTIC PROCEDURAL SCHEDULE ENGINE (Mulberry32 PRNG)
+            class Mulberry32 {
+                constructor(seed) {
+                    this.s = seed >>> 0;
+                }
+                next() {
+                    this.s = (this.s + 0x6D2B79F5) >>> 0;
+                    let t = this.s;
+                    t = Math.imul(t ^ (t >>> 15), t | 1);
+                    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+                    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+                }
+            }
+
+            // Network Time Sync
+            async function syncNetworkTime() {
+                try {
+                    const startReq = Date.now();
+                    const res = await fetch('https://timeapi.io/api/time/current/zone?timeZone=UTC', { cache: 'no-store' });
+                    if (res.ok) {
+                        const data = await res.json();
+                        const serverTime = new Date(data.dateTime + 'Z').getTime();
+                        const rtt = Date.now() - startReq;
+                        networkTimeOffsetMs = (serverTime + (rtt / 2)) - Date.now();
+                        console.log(`Synchronized with TimeAPI: offset = ${networkTimeOffsetMs}ms (RTT ${rtt}ms)`);
+                    }
+                } catch (e) {
+                    console.warn("TimeAPI sync timed out or failed; using local system clock.");
+                }
+            }
+
+            function getSynchronizedNowMs() {
+                return Date.now() + networkTimeOffsetMs;
+            }
+
+            // Fetch live-sched.json config (if published)
+            async function fetchLiveScheduleConfig() {
+                try {
+                    const res = await fetch(`live-sched.json?_cb=${Date.now()}`, { cache: 'no-store' });
+                    if (res.ok) {
+                        const json = await res.json();
+                        if (json && json.seed) {
+                            liveSchedConfig = json;
+                            console.log("Loaded custom live-sched.json config:", liveSchedConfig);
+                        }
+                    }
+                } catch(e) {
+                    console.log("No custom live-sched.json found; running procedural broadcast.");
+                }
+            }
+
+            // Calculate live procedural program at given real-world time
+            function getLiveProgramAt(timestampMs, hoursAhead = 14) {
+                const epochMs = new Date(liveSchedConfig.epoch || "2026-01-01T00:00:00Z").getTime();
+                const seed = liveSchedConfig.seed || 19401225;
+                const rng = new Mulberry32(seed);
+
+                let cursorMs = epochMs;
+                const windowStart = timestampMs - (15 * 60 * 1000);
+                const windowEnd = timestampMs + (hoursAhead * 3600 * 1000);
+
+                const recentMovies = [];
+                let step = 0;
+                let activeProgram = null;
+                const queueAhead = [];
+
+                while (cursorMs < windowEnd) {
+                    const isMovie = (step % 2 === 0);
+                    step++;
+
+                    if (isMovie) {
+                        const candidates = CURATED_FEATURE_FILMS.filter(m => !recentMovies.includes(m.id));
+                        const pool = candidates.length > 0 ? candidates : CURATED_FEATURE_FILMS;
+                        const idx = Math.floor(rng.next() * pool.length);
+                        const chosen = pool[idx];
+
+                        recentMovies.push(chosen.id);
+                        if (recentMovies.length > 6) recentMovies.shift();
+
+                        const durationMs = chosen.length * 1000;
+                        const itemEndMs = cursorMs + durationMs;
+
+                        const item = {
+                            type: 'movie',
+                            identifier: chosen.id,
+                            title: chosen.title,
+                            description: 'Public domain feature presentation.',
+                            duration: chosen.length,
+                            startMs: cursorMs,
+                            endMs: itemEndMs,
+                            url: null,
+                            sourceUrl: `https://archive.org/details/${chosen.id}`
+                        };
+
+                        if (cursorMs <= timestampMs && timestampMs < itemEndMs) {
+                            activeProgram = item;
+                        } else if (cursorMs > timestampMs) {
+                            queueAhead.push(item);
+                        }
+
+                        cursorMs = itemEndMs;
+                    } else {
+                        const idx = Math.floor(rng.next() * VINTAGE_POLICY_CONCESSION_REELS.length);
+                        const chosen = VINTAGE_POLICY_CONCESSION_REELS[idx];
+                        const durationMs = chosen.length * 1000;
+                        const itemEndMs = cursorMs + durationMs;
+
+                        const item = {
+                            type: 'preroll',
+                            identifier: chosen.id,
+                            title: chosen.title,
+                            description: 'Authentic theater policy & concessions bumper reel.',
+                            duration: chosen.length,
+                            startMs: cursorMs,
+                            endMs: itemEndMs,
+                            url: null,
+                            sourceUrl: `https://archive.org/details/${chosen.id}`
+                        };
+
+                        if (cursorMs <= timestampMs && timestampMs < itemEndMs) {
+                            activeProgram = item;
+                        } else if (cursorMs > timestampMs) {
+                            queueAhead.push(item);
+                        }
+
+                        cursorMs = itemEndMs;
+                    }
+                }
+
+                // Check for manual schedule inserts in live-sched.json
+                const inserts = liveSchedConfig.inserts || [];
+                for (const ins of inserts) {
+                    const insStartMs = new Date(ins.startTime).getTime();
+                    const insEndMs = insStartMs + (ins.duration * 1000);
+                    if (insStartMs <= timestampMs && timestampMs < insEndMs) {
+                        // Hard or graceful active insert
+                        activeProgram = {
+                            type: 'insert',
+                            identifier: ins.id || 'custom_insert',
+                            title: ins.title,
+                            description: ins.description || 'Special Scheduled Broadcast Event',
+                            duration: ins.duration,
+                            startMs: insStartMs,
+                            endMs: insEndMs,
+                            url: ins.url,
+                            sourceUrl: ins.sourceUrl || ins.url
+                        };
+                        break;
+                    }
+                }
+
+                return { current: activeProgram, queue: queueAhead };
+            }
+
+            // High-Entropy Fisher-Yates Shuffle for SOLO mode
             function robustShuffle(array) {
                 const arr = [...array];
                 const cryptoObj = window.crypto || window.msCrypto;
@@ -1268,7 +1477,7 @@
                 return arr;
             }
 
-            // Metadata Resolution with cache-busting timestamp
+            // Metadata Resolution with Cache-Buster
             async function resolveVideoUrl(identifier) {
                 try {
                     const cacheBuster = `_cb=${Date.now()}_${Math.random()}`;
@@ -1327,7 +1536,7 @@
                 for (const candidate of shuffled) {
                     const resolved = await resolveVideoUrl(candidate.id);
                     if (resolved && resolved.url) {
-                        const dur = resolved.duration || 4500;
+                        const dur = resolved.duration || candidate.length;
                         const startTime = isFirstMovie ? calculateInSituStartTime(dur) : 0;
                         return {
                             type: 'movie',
@@ -1367,7 +1576,7 @@
                 return null;
             }
 
-            // 3. DYNAMIC CURTAIN SIZING & ASPECT RATIO MATTE
+            // 4. DYNAMIC CURTAINS & FLOOR REFLECTION
             function updateCurtainPositions() {
                 if (!curtainsOpened) {
                     curtainInnerLeft.style.width = '50%';
@@ -1405,7 +1614,6 @@
 
             window.addEventListener('resize', updateCurtainPositions);
 
-            // 4. FLOOR REFLECTION LOOP
             let reflectionRafId = null;
             function updateFloorReflection() {
                 if (activeVideo && !activeVideo.paused && activeVideo.readyState >= 2) {
@@ -1422,7 +1630,7 @@
             }
             reflectionRafId = requestAnimationFrame(updateFloorReflection);
 
-            // 5. UPDATE TIMELINE & RUNTIME IN INFO PANEL
+            // 5. TIMELINE & RUNTIME IN INFO PANEL
             function updateInfoTimeline() {
                 const duration = activeVideo.duration || (currentQueue[currentIndex] && currentQueue[currentIndex].duration) || 0;
                 const current = activeVideo.currentTime || 0;
@@ -1453,6 +1661,9 @@
                     if (current.type === 'preroll') {
                         reelBadge.style.display = 'block';
                         reelBadge.textContent = 'Cinema Policy & Concessions';
+                    } else if (current.type === 'insert') {
+                        reelBadge.style.display = 'block';
+                        reelBadge.textContent = 'Special Presentation';
                     } else {
                         reelBadge.style.display = 'none';
                     }
@@ -1489,13 +1700,26 @@
             async function prebufferNext() {
                 const next = currentQueue[currentIndex + 1];
                 if (next && next.url) {
-                    console.log("Pre-buffering next stream well in advance:", next.title);
                     prebufferElement.src = next.url;
                     prebufferElement.load();
                 }
             }
 
             async function ensureUpcomingQueue() {
+                if (currentMode === 'live') {
+                    // In LIVE mode, upcoming queue items are resolved dynamically from schedule
+                    const next = currentQueue[currentIndex + 1];
+                    if (next && !next.url && next.identifier) {
+                        const resolved = await resolveVideoUrl(next.identifier);
+                        if (resolved) {
+                            next.url = resolved.url;
+                            prebufferNext();
+                        }
+                    }
+                    updateMarquee();
+                    return;
+                }
+
                 while (currentQueue.length <= currentIndex + 2) {
                     const lastItem = currentQueue[currentQueue.length - 1];
                     if (!lastItem || lastItem.type === 'movie') {
@@ -1547,6 +1771,15 @@
                 if (!item) {
                     isTransitioning = false;
                     return;
+                }
+
+                if (!item.url && item.identifier) {
+                    const resolved = await resolveVideoUrl(item.identifier);
+                    if (resolved) {
+                        item.url = resolved.url;
+                        item.duration = resolved.duration || item.duration;
+                        item.description = resolved.description || item.description;
+                    }
                 }
 
                 updateMarquee();
@@ -1602,6 +1835,12 @@
             }
 
             function playNext() {
+                if (currentMode === 'live') {
+                    // Re-sync live track
+                    syncToLiveSchedule();
+                    return;
+                }
+
                 if (currentIndex + 1 < currentQueue.length) {
                     playQueueIndex(currentIndex + 1);
                 } else {
@@ -1614,6 +1853,7 @@
             }
 
             function playPrevious() {
+                if (currentMode === 'live') return; // Disabled in Live
                 if (currentIndex > 0) {
                     playQueueIndex(currentIndex - 1);
                 } else {
@@ -1622,6 +1862,8 @@
             }
 
             function togglePlayPause() {
+                if (currentMode === 'live') return; // No pausing in live broadcast mode
+
                 if (activeVideo.paused) {
                     activeVideo.play();
                     ctrlPlayPause.innerHTML = "&#9646;&#9646; Pause";
@@ -1656,7 +1898,70 @@
                 }
             }
 
-            // 8. PAUSE MENU & 3-SLOT SAVE/LOAD/EXPORT SYSTEM
+            // 8. MODE SWITCHING: LIVE BROADCAST vs. SOLO CINEMA
+            async function syncToLiveSchedule() {
+                const nowMs = getSynchronizedNowMs();
+                const prog = getLiveProgramAt(nowMs, 14);
+
+                if (!prog.current) {
+                    console.warn("Could not compute live program; falling back to solo.");
+                    return;
+                }
+
+                const elapsedSec = (nowMs - prog.current.startMs) / 1000;
+                prog.current.startTime = Math.max(0, elapsedSec);
+
+                currentQueue = [prog.current, ...prog.queue];
+                currentIndex = 0;
+
+                await playQueueIndex(0, prog.current.startTime);
+            }
+
+            async function toggleLiveMode() {
+                if (currentMode === 'live') {
+                    // Switch from LIVE -> SOLO
+                    currentMode = 'solo';
+                    modeLabel.textContent = 'SOLO';
+                    ctrlPlayPause.style.display = 'flex';
+                    liveIndicatorBtn.style.display = 'none';
+                    ctrlPrev.style.opacity = '1';
+                    ctrlNext.style.opacity = '1';
+
+                    // Restore previously saved SOLO state if available
+                    if (savedSoloState && savedSoloState.queue) {
+                        currentQueue = savedSoloState.queue;
+                        currentIndex = savedSoloState.currentIndex;
+                        playQueueIndex(currentIndex, savedSoloState.playbackPosition);
+                    } else {
+                        // Bootstrap fresh solo queue
+                        currentQueue = [];
+                        currentIndex = 0;
+                        bootstrapSoloCinema();
+                    }
+                } else {
+                    // Switch from SOLO -> LIVE
+                    // Gracefully save active solo state & pause solo video
+                    savedSoloState = {
+                        queue: currentQueue,
+                        currentIndex: currentIndex,
+                        playbackPosition: activeVideo.currentTime || 0
+                    };
+                    hidePauseMenu();
+
+                    currentMode = 'live';
+                    modeLabel.textContent = 'LIVE';
+                    ctrlPlayPause.style.display = 'none';
+                    liveIndicatorBtn.style.display = 'inline-flex';
+                    ctrlPrev.style.opacity = '0.35';
+                    ctrlNext.style.opacity = '0.35';
+
+                    syncToLiveSchedule();
+                }
+            }
+
+            modeToggleBtn.addEventListener('click', toggleLiveMode);
+
+            // 9. PAUSE MENU & 3-SLOT SAVE/LOAD/EXPORT SYSTEM
             const STORAGE_KEY_PREFIX = 'starlight_save_slot_';
 
             function getSlotData(slotNum) {
@@ -1692,6 +1997,7 @@
             }
 
             function showPauseMenu() {
+                if (currentMode === 'live') return;
                 if (infoDrawer.style.display === 'block') {
                     infoDrawer.style.display = 'none';
                     infoDrawer.style.opacity = '0';
@@ -1784,7 +2090,6 @@
 
                 if (activeSubmenuMode === 'save') {
                     if (existing) {
-                        // Prompt confirmation modal before overwrite
                         showConfirmModal(`Slot ${slot} already has a saved session ("${existing.currentMovieTitle}"). Overwrite?`, () => {
                             const payload = generateSessionPayload();
                             setSlotData(slot, payload);
@@ -1804,12 +2109,9 @@
                     }
                     restoreSession(existing);
                 } else if (activeSubmenuMode === 'export') {
-                    // Export slot or Import to slot
                     if (existing) {
-                        // Export this slot directly
                         downloadJsonFile(existing, `starlight_slot_${slot}.json`);
                     } else {
-                        // Trigger file picker to load into this empty slot
                         pendingImportSlot = slot;
                         jsonImportInput.click();
                     }
@@ -1821,6 +2123,17 @@
                     alert("Invalid or corrupt session payload.");
                     return;
                 }
+
+                // If currently in LIVE mode, automatically switch to SOLO to respect restored session
+                if (currentMode === 'live') {
+                    currentMode = 'solo';
+                    modeLabel.textContent = 'SOLO';
+                    ctrlPlayPause.style.display = 'flex';
+                    liveIndicatorBtn.style.display = 'none';
+                    ctrlPrev.style.opacity = '1';
+                    ctrlNext.style.opacity = '1';
+                }
+
                 currentQueue = payload.queue;
                 currentIndex = payload.currentIndex || 0;
                 const pos = payload.playbackPosition || 0;
@@ -1854,13 +2167,11 @@
                 confirmModalYes.focus();
             }
 
-            // Export current active session
             btnSlotsExportFile.addEventListener('click', () => {
                 const payload = generateSessionPayload();
                 downloadJsonFile(payload, `starlight_session_${Date.now()}.json`);
             });
 
-            // Trigger file picker for import
             btnSlotsImportFile.addEventListener('click', () => {
                 pendingImportSlot = null;
                 jsonImportInput.click();
@@ -1891,7 +2202,6 @@
                                 doSave();
                             }
                         } else {
-                            // Direct restore into playback session
                             restoreSession(parsed);
                         }
                     } catch(err) {
@@ -1907,7 +2217,7 @@
             btnMenuExport.addEventListener('click', () => openSubmenu('export'));
             btnSlotsBack.addEventListener('click', showPauseMainMenu);
 
-            // 9. SPARTAN "LEAN IN" TRANSITION WITH FULLSCREEN HARMONIZATION
+            // 10. SPARTAN "LEAN IN" TRANSITION WITH FULLSCREEN HARMONIZATION
             function enterLeanInMode() {
                 const currentTime = activeVideo.currentTime;
                 const isPaused = activeVideo.paused;
@@ -1966,8 +2276,8 @@
                 }
             });
 
-            // 10. BOOTSTRAP (Purged cache on each load)
-            async function bootstrapCinema() {
+            // 11. BOOTSTRAP INITIALIZATION
+            async function bootstrapSoloCinema() {
                 drawCurtainsClosed();
                 nowShowingTitle.textContent = "Selecting Classic Presentation...";
 
@@ -1990,11 +2300,29 @@
                     playQueueIndex(0);
                 } else {
                     nowShowingTitle.textContent = "Archive feed temporarily unavailable. Retrying...";
-                    setTimeout(bootstrapCinema, 3000);
+                    setTimeout(bootstrapSoloCinema, 3000);
                 }
             }
 
-            // 11. REMOTE, GAMEPAD & KEYBOARD NAVIGATION
+            async function initializeApp() {
+                drawCurtainsClosed();
+                nowShowingTitle.textContent = "Tuning to Starlight Live Broadcast...";
+
+                // Initialize network clock sync & live schedule config
+                await Promise.all([syncNetworkTime(), fetchLiveScheduleConfig()]);
+
+                if (currentMode === 'live') {
+                    ctrlPlayPause.style.display = 'none';
+                    liveIndicatorBtn.style.display = 'inline-flex';
+                    ctrlPrev.style.opacity = '0.35';
+                    ctrlNext.style.opacity = '0.35';
+                    await syncToLiveSchedule();
+                } else {
+                    await bootstrapSoloCinema();
+                }
+            }
+
+            // 12. REMOTE, GAMEPAD & KEYBOARD NAVIGATION
             window.addEventListener('keydown', (e) => {
                 if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
@@ -2008,6 +2336,7 @@
                         break;
                     case 'ArrowLeft':
                     case 'MediaTrackPrevious':
+                        if (currentMode === 'live') break;
                         if (e.altKey || e.ctrlKey) {
                             playPrevious();
                         } else if (document.activeElement && focusableElements.includes(document.activeElement)) {
@@ -2019,6 +2348,7 @@
                         break;
                     case 'ArrowRight':
                     case 'MediaTrackNext':
+                        if (currentMode === 'live') break;
                         if (e.altKey || e.ctrlKey) {
                             playNext();
                         } else if (document.activeElement && focusableElements.includes(document.activeElement)) {
@@ -2031,7 +2361,6 @@
                     case 'ArrowUp':
                         e.preventDefault();
                         if (pauseMenuDrawer.style.display === 'block') {
-                            // D-pad navigation within pause drawer
                             const cards = pauseMenuDrawer.querySelectorAll('.menu-action-btn, .slot-card, .bar-btn');
                             const idx = Array.from(cards).indexOf(document.activeElement);
                             if (idx > 0) cards[idx - 1].focus();
@@ -2056,6 +2385,10 @@
                             togglePlayPause();
                         }
                         break;
+                    case 'l':
+                    case 'L':
+                        toggleLiveMode();
+                        break;
                     case 'f':
                     case 'F':
                         e.preventDefault();
@@ -2079,7 +2412,7 @@
                         } else if (pauseSubmenuSlots.style.display === 'block') {
                             showPauseMainMenu();
                         } else if (pauseMenuDrawer.style.display === 'block') {
-                            togglePlayPause(); // Resumes and hides
+                            togglePlayPause();
                         } else if (leanInView.style.display === 'block') {
                             exitLeanInMode();
                         } else {
@@ -2127,7 +2460,10 @@
                         }
                     }
                     if (wasJustPressed(2)) toggleInfo();
-                    if (wasJustPressed(3)) toggleMute();
+                    if (wasJustPressed(3)) {
+                        // Gamepad Y: Mute, or Y+LB: toggle Live
+                        toggleMute();
+                    }
                     if (wasJustPressed(4)) playPrevious();
                     if (wasJustPressed(5)) playNext();
                     if (wasJustPressed(8)) {
@@ -2165,7 +2501,23 @@
             spartanVideo.addEventListener('ended', playNext);
             mainVideo.addEventListener('loadedmetadata', updateCurtainPositions);
 
-            bootstrapCinema();
+            // Periodic live drift re-sync check every 15 seconds
+            setInterval(() => {
+                if (currentMode === 'live' && !activeVideo.paused && activeVideo.duration) {
+                    const nowMs = getSynchronizedNowMs();
+                    const liveProg = getLiveProgramAt(nowMs, 2);
+                    if (liveProg && liveProg.current) {
+                        const targetSec = (nowMs - liveProg.current.startMs) / 1000;
+                        const drift = Math.abs(activeVideo.currentTime - targetSec);
+                        if (drift > 3.0 && drift < activeVideo.duration) {
+                            console.log(`Synchronizing live clock drift: ${drift.toFixed(2)}s`);
+                            activeVideo.currentTime = targetSec;
+                        }
+                    }
+                }
+            }, 15000);
+
+            initializeApp();
         });
     </script>
 </body>
