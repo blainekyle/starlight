@@ -1,6 +1,6 @@
 # Starlight Cinema Classics 🎬✨
 
-[![GitHub Pages](https://img.shields.io/badge/Hosted%20on-GitHub%20Pages-blue?logo=github)](https://blainekyle.github.io/AO-Movies/)
+[![GitHub Pages](https://img.shields.io/badge/Hosted%20on-GitHub%20Pages-blue?logo=github)](https://blainekyle.github.io/starlight/)
 [![License: Public Domain](https://img.shields.io/badge/License-Public%20Domain-yellow.svg)](https://creativecommons.org/publicdomain/mark/1.0/)
 [![Sync Architecture](https://img.shields.io/badge/Live%20Sync-Zero--Server%20Procedural%20PRNG-brightgreen)](#the-magic-serverless-globally-synchronized-live-broadcast)
 
